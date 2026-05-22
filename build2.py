@@ -5,7 +5,7 @@ import streamlit as st
 # =========================================================
 
 st.set_page_config(
-    page_title="🇪🇨 OPTIMIZA TU BUILD 🇪🇨",
+    page_title="optimizate ñaño",
     layout="centered"
 )
 
@@ -83,7 +83,7 @@ div[data-testid="stProgressBar"] div[role="progressbar"][aria-label="Produccion"
 # TITULO
 # =========================================================
 
-st.title("🇪🇨 OPTIMIZADOR RPG")
+st.title("🇪🇨 optimizate ñaño")
 
 st.write("Sistema automático de builds")
 
@@ -414,6 +414,7 @@ if st.button("🇪🇨 CALCULAR BUILD"):
             energia = (
                 build["Energia"]["valor"]
             )
+
 
             produccion = (
                 build["Produccion"]["valor"]
