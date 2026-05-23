@@ -293,10 +293,6 @@ if st.button("🇪🇨 CALCULAR BUILD"):
 
             hambre = build["Hambre"]["valor"]
 
-            # =============================================
-            # DAÑO
-            # =============================================
-
             daño_base = ataque * precision
 
             bonus_critico = (
@@ -310,28 +306,16 @@ if st.button("🇪🇨 CALCULAR BUILD"):
                 bonus_critico
             )
 
-            # =============================================
-            # DEFENSA
-            # =============================================
-
             defensa = (
                 armadura * 2.4 +
                 esquiva * 3.2 +
                 salud * 1.2
             )
 
-            # =============================================
-            # UTILIDAD
-            # =============================================
-
             utilidad = (
                 hambre * 14 +
                 botin * 5
             )
-
-            # =============================================
-            # PRIORIDADES
-            # =============================================
 
             prioridad_precision = (
                 precision * 170
@@ -349,20 +333,12 @@ if st.button("🇪🇨 CALCULAR BUILD"):
                 hambre * 10
             )
 
-            # =============================================
-            # SINERGIA
-            # =============================================
-
             sinergia = (
                 precision *
                 critica *
                 daño_critico *
                 120
             )
-
-            # =============================================
-            # BALANCE
-            # =============================================
 
             diferencia = max(
                 ataque / 3,
@@ -415,19 +391,64 @@ if st.button("🇪🇨 CALCULAR BUILD"):
                 build["Energia"]["valor"]
             )
 
-
             produccion = (
                 build["Produccion"]["valor"]
             )
 
-            economia = produccion * 12
+            # =========================================
+            # BASE
+            # =========================================
 
-            economia += emprendimiento * 2
+            economia = 0
 
-            economia += energia * 1.5
+            # PRODUCCION = prioridad principal
+            economia += produccion * 11
+
+            # ENERGIA = importante
+            economia += energia * 6
+
+            # EMPRENDIMIENTO = apoyo
+            economia += emprendimiento * 3.5
+
+            # =========================================
+            # SINERGIA
+            # =========================================
+
+            sinergia = (
+                min(
+                    energia,
+                    produccion * 2
+                ) * 2
+            )
+
+            economia += sinergia
+
+            # =========================================
+            # BONUS EMPRENDIMIENTO
+            # =========================================
+
+            economia += (
+                emprendimiento *
+                produccion
+            ) * 0.08
+
+            # =========================================
+            # PENALIZACION
+            # =========================================
+
+            diferencia = abs(
+                energia -
+                (produccion * 2)
+            )
+
+            economia -= diferencia * 0.7
+
+            # =========================================
+            # BONUS EMPRESAS
+            # =========================================
 
             economia *= (
-                1 + empresas_deseadas * 0.12
+                1 + empresas_deseadas * 0.10
             )
 
             return economia
@@ -535,8 +556,6 @@ if st.button("🇪🇨 CALCULAR BUILD"):
             f"🪙 Puntos sobrantes: {puntos}"
         )
 
-   
-            
 # =====================================================
 # FOOTER
 # =====================================================
@@ -556,4 +575,3 @@ War Era Ecuadorian company© 2026
 
 </div>
 """, unsafe_allow_html=True)
-
